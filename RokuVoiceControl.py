@@ -1,13 +1,23 @@
+# -*- coding: utf-8 -*-
+"""
+RokuVoiceControl.py: Simple interface to control 
+	a Roku streaming player over telnet using
+	either voice or text entry
+
+@author: rwalker (r_walker at zoho.com)
+"""
 import speech_recognition as sr
 from telnetlib import Telnet
+from argparse import ArgumentParser
 import sys
 
+# NOTE: TimeoutError type is used by speech_recognition but appears to be
+# only a predefined Exception in Python3.  So we add it to the module here.
 class TimeoutError(Exception):
 	def __init__(self, value):
 		self.value = value
 	def __str__(self):
 		return repr(self.value)
-
 sr.TimeoutError = TimeoutError
 
 class Concept:
@@ -45,6 +55,7 @@ class RokuRemote:
 		self.concepts  = ConceptList
 	
 	def processRequest(self, req):
+		'''send a text string to the Roku instance'''
 		tokens = req.split(" ")
 		for concept in self.concepts:
 			action = concept.conceptMatch(tokens)
@@ -57,6 +68,10 @@ class RokuRemote:
 		print("I didn't get that.  Please try again.")
 
 if __name__=="__main__":
+	argparser = ArgumentParser(usage="RokuVoiceControl.py host port")
+	argparser.add_argument("host")
+	argparser.add_argument("port")
+	args = argparser.parse_args()
 	welcomeString = '''
 ##############################################################
 Welcome to the voice driven Roku remote!
@@ -70,7 +85,7 @@ say 'quit' to exit remote.
 '''
 	# initialize
 	print(welcomeString)
-	rokuRemote = RokuRemote(str(sys.argv[1]),str(sys.argv[2]), ConceptList)
+	rokuRemote = RokuRemote(args.host, args.port, ConceptList)
 	recognizer = sr.Recognizer()
 	recognizer.energy_threshold = 2000
 	recognizer.pause_threshold = .5
@@ -97,4 +112,3 @@ say 'quit' to exit remote.
 			break
 		if rec_success == True:
 			rokuRemote.processRequest(command)
-
