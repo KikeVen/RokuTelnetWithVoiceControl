@@ -33,17 +33,17 @@ class Concept:
 				return(self.action)
 
 # Concept data for RokuRemote
-PlayConcept = Concept(['play'], 'press play')
-SelectConcept = Concept(['select','ok'], 'press select')
-LeftConcept = Concept(['minus','left', 'decrement'], 'press left')
-RightConcept = Concept(['right','plus','increment'], 'press right')
-UpConcept = Concept(['up'], 'press up')
-DownConcept = Concept(['down'], 'press down')
-FastForwardConcept = Concept(['advance','fast','forward'], 'press forward')
-RewindConcept = Concept(['rewind','reverse'], 'press backward')
-HomeConcept = Concept(['home','done'], 'press home')
-BackConcept = Concept(['back'], 'press back')
-PauseConcept = Concept(['pause','paws','hold','wait','stop'],'press pause')
+PlayConcept = Concept(['play'], 'press p')
+SelectConcept = Concept(['select','ok'], 'press s')
+LeftConcept = Concept(['minus','left', 'decrement'], 'press l')
+RightConcept = Concept(['right','plus','increment'], 'press r')
+UpConcept = Concept(['up'], 'press u')
+DownConcept = Concept(['down'], 'press d')
+FastForwardConcept = Concept(['advance','fast','forward'], 'press f')
+RewindConcept = Concept(['rewind','reverse'], 'press b')
+HomeConcept = Concept(['home','done'], 'press h')
+BackConcept = Concept(['back'], 'press b')
+PauseConcept = Concept(['pause','paws','hold','wait','stop'],'press p')
 ConceptList = [PlayConcept, SelectConcept, LeftConcept, RightConcept, 
 	UpConcept, DownConcept, FastForwardConcept, RewindConcept,
 	HomeConcept, BackConcept, PauseConcept]
