@@ -71,6 +71,8 @@ if __name__=="__main__":
 	argparser = ArgumentParser(usage="RokuVoiceControl.py host port")
 	argparser.add_argument("host")
 	argparser.add_argument("port")
+	argparser.add_argument("-e", dest="energy_threshold", default=500, type=int,
+		help = "energy threshold. Suggested range is 200-3000")
 	args = argparser.parse_args()
 	welcomeString = '''
 ##############################################################
@@ -87,7 +89,7 @@ say 'quit' to exit remote.
 	print(welcomeString)
 	rokuRemote = RokuRemote(args.host, args.port, ConceptList)
 	recognizer = sr.Recognizer()
-	recognizer.energy_threshold = 2000
+	recognizer.energy_threshold = args.energy_threshold
 	recognizer.pause_threshold = .5
 	command = ''
 
