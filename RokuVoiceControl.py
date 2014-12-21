@@ -37,13 +37,13 @@ PlayConcept = Concept(['play'], 'press p')
 SelectConcept = Concept(['select','ok'], 'press s')
 LeftConcept = Concept(['minus','left', 'decrement'], 'press l')
 RightConcept = Concept(['right','plus','increment'], 'press r')
-UpConcept = Concept(['up'], 'press u')
-DownConcept = Concept(['down'], 'press d')
-FastForwardConcept = Concept(['advance','fast','forward'], 'press f')
-RewindConcept = Concept(['rewind','reverse'], 'press b')
-HomeConcept = Concept(['home','done'], 'press h')
+UpConcept = Concept(['up','u'], 'press u')
+DownConcept = Concept(['down','d'], 'press d')
+FastForwardConcept = Concept(['advance','fast','forward','f'], 'press f')
+RewindConcept = Concept(['rewind','reverse','b'], 'press b')
+HomeConcept = Concept(['home','done','h'], 'press h')
 BackConcept = Concept(['back'], 'press b')
-PauseConcept = Concept(['pause','paws','hold','wait','stop'],'press p')
+PauseConcept = Concept(['pause','paws','hold','wait','stop','p'],'press p')
 ConceptList = [PlayConcept, SelectConcept, LeftConcept, RightConcept, 
 	UpConcept, DownConcept, FastForwardConcept, RewindConcept,
 	HomeConcept, BackConcept, PauseConcept]
@@ -94,7 +94,7 @@ say 'quit' to exit remote.
 	command = ''
 
 	# run the remote interface
-	while(command!='quit'):
+	while(command!='quit' or 'exit'):
 		command = raw_input("Roku>> ")
 		rec_success = True
 		if command == 'v':
@@ -110,7 +110,7 @@ say 'quit' to exit remote.
 						print("Could not process voice command.")
 				except sr.TimeoutError:
 					print("Didn't detect any speech.")
-		if command == 'quit':
+		if command == 'quit' or 'exit':
 			break
 		if rec_success == True:
 			rokuRemote.processRequest(command)
